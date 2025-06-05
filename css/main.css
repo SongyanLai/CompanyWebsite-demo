@@ -282,6 +282,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(3px);
 }
 
 /* hero 内容区（文字、按钮等），置于轮播图上层 */
