@@ -1,858 +1,1208 @@
-/* 
- * 主要样式表
- * 企业官网
+/*==============================================================================
+ * 合并主样式表（main.css + carousel.css + normalize.css）
+ * =============================================================================
+ * 此文件整合了：
+ *  1. 主样式（变量、布局、组件样式等）
+ *  2. 轮播图功能样式（.carousel、.slide 等）
+ *  3. Normalize.css（浏览器默认样式重置）
+ *
+ * 详细注释帮助理解各部分功能与作用，请根据项目需求自行调整变量值、尺寸、颜色等。
+ * -----------------------------------------------------------------------------
  */
 
-/* 基础样式 */
+/*==============================================================================
+ * 1. CSS 变量定义（:root）
+ * -------------------------------------------------------------------------------
+ * 定义全局颜色、字体、阴影、过渡等变量，便于后续维护与修改。
+ * ============================================================================= */
 :root {
-    --primary-color: #2c5282;
-    --secondary-color: #4299e1;
-    --accent-color: #f6ad55;
-    --text-color: #2d3748;
-    --light-text: #718096;
-    --bg-color: #ffffff;
-    --light-bg: #f7fafc;
-    --dark-bg: #1a202c;
-    --border-color: #e2e8f0;
-    --success-color: #48bb78;
-    --error-color: #f56565;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+  /* 主题色彩 */
+  --primary-color: #2c5282; /* 主色，深蓝 */
+  --secondary-color: #4299e1; /* 次色，浅蓝 */
+  --accent-color: #f6ad55; /* 强调色，橙色 */
+
+  /* 文本颜色 */
+  --text-color: #2d3748; /* 正文字体颜色，深灰 */
+  --light-text: #718096; /* 辅助文字，浅灰 */
+
+  /* 背景色 */
+  --bg-color: #ffffff; /* 主背景，白色 */
+  --light-bg: #f7fafc; /* 浅背景，接近白 */
+  --dark-bg: #1a202c; /* 深背景，深蓝灰 */
+
+  /* 边框与状态颜色 */
+  --border-color: #e2e8f0; /* 边框颜色，浅灰 */
+  --success-color: #48bb78; /* 成功提示色，绿色 */
+  --error-color: #f56565; /* 错误提示色，红色 */
+
+  /* 其他通用变量 */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 通用阴影 */
+  --transition: all 0.3s ease; /* 通用过渡时间与曲线 */
 }
 
+/*==============================================================================
+ * 2. 全局基础样式
+ * -------------------------------------------------------------------------------
+ * 包括通用元素重置、字体设置、容器宽度等。
+ * ============================================================================= */
+
+/* 通用盒模型与重置 */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* 全局平滑滚动行为 */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
+/* 页面主体字体、背景与行高 */
 body {
-    font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
+/* 链接默认样式与悬停效果 */
 a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: var(--transition);
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
 }
-
 a:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
+/* 列表、图片、无序列表等基础样式 */
 ul {
-    list-style: none;
+  list-style: none;
 }
-
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
+/* 最大宽度容器，居中布局 */
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* 通用区块间距 */
 .section {
-    padding: 80px 0;
+  padding: 80px 0;
 }
 
+/* 区块标题与副标题 */
 .section-header {
-    text-align: center;
-    margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 50px;
 }
-
 .section-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: var(--primary-color);
-    position: relative;
-    display: inline-block;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
 }
-
+/* 区块标题下方的装饰线 */
 .section-header h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
 }
-
 .section-header p {
-    font-size: 1.1rem;
-    color: var(--light-text);
+  font-size: 1.1rem;
+  color: var(--light-text);
 }
 
+/* 浅色背景辅助类，可在需要浅背景的 section 上添加 .bg-light */
 .bg-light {
-    background-color: var(--light-bg);
+  background-color: var(--light-bg);
 }
 
+/* 通用按钮样式 */
 .btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    transition: var(--transition);
-    border: none;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
 }
-
+/* 主按钮（实心） */
 .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
-
 .btn-primary:hover {
-    background-color: var(--secondary-color);
-    color: white;
+  background-color: var(--secondary-color);
+  color: white;
 }
-
+/* 辅助按钮（空心） */
 .btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
-
 .btn-secondary:hover {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 
-/* 头部导航 */
+/*==============================================================================
+ * 3. 头部导航（.header）
+ * -------------------------------------------------------------------------------
+ * 固定在顶部，滚动时可以改变样式（.scrolled）。包含 LOGO、导航菜单、移动端菜单按钮等。
+ * ============================================================================= */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: var(--box-shadow);
-    z-index: 1000;
-    padding: 15px 0;
-    transition: var(--transition);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  padding: 15px 0;
+  transition: var(--transition);
 }
-
+/* 当页面滚动超过一定距离时，缩小内边距并提升透明度 */
 .header.scrolled {
-    padding: 10px 0;
-    background-color: rgba(255, 255, 255, 0.98);
+  padding: 10px 0;
+  background-color: rgba(255, 255, 255, 0.98);
 }
-
+/* 头部内容器：左右布局 */
 .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* LOGO 区域 */
 .logo img {
-    height: 40px;
+  height: 40px; /* 可根据实际 LOGO 高度调整 */
 }
 
+/* 主导航菜单 */
 .main-nav ul {
-    display: flex;
+  display: flex;
 }
-
 .main-nav li {
-    margin-left: 30px;
+  margin-left: 30px;
 }
-
 .main-nav a {
-    color: var(--text-color);
-    font-weight: 500;
-    position: relative;
-    padding: 5px 0;
+  color: var(--text-color);
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+  transition: var(--transition);
 }
-
+/* 导航下划线动画：宽度从 0 扩展到 100% */
 .main-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
 }
-
 .main-nav a:hover::after,
 .main-nav a.active::after {
-    width: 100%;
+  width: 100%;
 }
 
+/* 移动端汉堡菜单按钮（默认隐藏，在小屏时显示） */
 .mobile-menu-btn {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
-/* 首页横幅 */
+/*==============================================================================
+ * 4. 轮播图功能样式（首页 hero 区域）
+ * -------------------------------------------------------------------------------
+ * 将原来的静态背景替换为可自动切换的轮播图。包含 .carousel 容器与 .slide 元素。
+ * ============================================================================= */
+/* 使 hero 区域相对定位以承载绝对定位的幻灯片容器 */
 .hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/hero-bg.jpg') no-repeat center center/cover;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: white;
+  position: relative;
+  overflow: hidden;
+  /* 100vh 表示占满整个可视高度，如果希望固定高度，可修改为 500px 等 */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #000; /* 备用背景色，防止图片加载前出现空白 */
 }
 
+/* 轮播图容器，覆盖整个 hero 区域 */
+.carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* 放在 hero-content 之下 */
+}
+
+/* 单张幻灯片：绝对定位，填充父容器 */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* 默认隐藏 */
+  transition: opacity 1s ease-in-out; /* 渐变效果 */
+}
+/* 当前活动幻灯片可见 */
+.slide.active {
+  opacity: 1;
+}
+
+/* 幻灯片内的图片：充满容器并保持裁剪比例 */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* hero 内容区（文字、按钮等），置于轮播图上层 */
 .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  color: white; /* 确保文字在深色背景上清晰可见 */
+  max-width: 800px;
+  padding: 0 20px;
 }
-
+/* hero 标题 */
 .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    animation: fadeInDown 1s ease;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease;
 }
-
+/* hero 副标题 */
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    animation: fadeInUp 1s ease 0.3s;
-    animation-fill-mode: both;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease 0.3s;
+  animation-fill-mode: both;
 }
-
+/* hero 按钮动画 */
 .hero-btns {
-    animation: fadeInUp 1s ease 0.6s;
-    animation-fill-mode: both;
+  animation: fadeInUp 1s ease 0.6s;
+  animation-fill-mode: both;
 }
-
 .hero-btns .btn {
-    margin: 0 10px;
+  margin: 0 10px;
 }
 
-/* 关于我们 */
+/*==============================================================================
+ * 5. 关于我们（.about section）
+ * -------------------------------------------------------------------------------
+ * 左右布局：文字与图片，并配合公司价值观区域（.company-values）。
+ * ============================================================================= */
 .about-content {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
 }
-
 .about-text {
-    flex: 1;
+  flex: 1;
 }
-
 .about-image {
-    flex: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 }
-
 .about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
 }
-
 .about-text p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
+/* 公司价值观区域：3 列布局 */
 .company-values {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
-
 .value-item {
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: var(--light-bg);
-    transition: var(--transition);
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--light-bg);
+  transition: var(--transition);
+  margin: 0 10px; /* 列间距 */
 }
-
 .value-item:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--box-shadow);
+  transform: translateY(-10px);
+  box-shadow: var(--box-shadow);
 }
-
 .value-item i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
 }
-
 .value-item h4 {
-    margin-bottom: 10px;
-    color: var(--primary-color);
+  margin-bottom: 10px;
+  color: var(--primary-color);
 }
 
-/* 服务内容 */
+/*==============================================================================
+ * 6. 服务内容（.services section）
+ * -------------------------------------------------------------------------------
+ * 使用 CSS Grid 实现响应式卡片布局，每个服务卡片包含图标、标题与描述。
+ * ============================================================================= */
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px; /* 网格间距 */
 }
-
 .service-card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
 }
-
 .service-card:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
-
 .service-icon {
-    width: 70px;
-    height: 70px;
-    background-color: var(--light-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
+  width: 70px;
+  height: 70px;
+  background-color: var(--light-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
 }
-
 .service-icon i {
-    font-size: 30px;
-    color: var(--primary-color);
+  font-size: 30px;
+  color: var(--primary-color);
 }
-
 .service-card h3 {
-    margin-bottom: 15px;
-    color: var(--primary-color);
+  margin-bottom: 15px;
+  color: var(--primary-color);
 }
 
-/* 产品展示 */
+/*==============================================================================
+ * 7. 产品展示（.products section）
+ * -------------------------------------------------------------------------------
+ * Tab 导航 + 内容切换，每个 .tab-btn 对应 .tab-pane，使用 .active 控制显示。
+ * ============================================================================= */
 .product-tabs {
-    margin-top: 30px;
+  margin-top: 30px;
 }
-
 .tab-nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
 }
-
 .tab-btn {
-    padding: 12px 25px;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--light-text);
-    cursor: pointer;
-    position: relative;
-    transition: var(--transition);
+  padding: 12px 25px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light-text);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
 }
-
 .tab-btn::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
 }
-
 .tab-btn.active {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
-
 .tab-btn.active::after {
-    width: 100%;
+  width: 100%;
 }
-
 .tab-pane {
-    display: none;
+  display: none;
 }
-
 .tab-pane.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
+  display: block;
+  animation: fadeIn 0.5s ease;
 }
-
+/* 产品详情布局：左右各一列，图片与文字并列 */
 .product-info {
-    display: flex;
-    align-items: center;
-    gap: 50px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
 }
-
 .product-image {
-    flex: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
 }
-
 .product-details {
-    flex: 1;
+  flex: 1;
 }
-
 .product-details h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
 }
-
 .product-details p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
+/* 功能点列表：每项前有绿色勾选图标 */
 .feature-list {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
-
 .feature-list li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
-
 .feature-list i {
-    color: var(--success-color);
-    margin-right: 10px;
+  color: var(--success-color);
+  margin-right: 10px;
 }
 
-/* 成功案例 */
+/*==============================================================================
+ * 8. 成功案例（.cases section）
+ * -------------------------------------------------------------------------------
+ * 手动+自动轮播：.cases-slider 容器，.case-item 为每条案例，左右按钮控制切换。
+ * ============================================================================= */
 .cases-slider {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
-
+/* 每条案例卡片：左右布局，图片+内容 */
 .case-item {
-    display: flex;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
-    margin-bottom: 30px;
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 30px;
 }
-
+/* 案例图片 */
 .case-image {
-    flex: 1;
-    min-height: 300px;
+  flex: 1;
+  min-height: 300px; /* 保证一定高度 */
 }
-
 .case-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
+/* 案例文字内容 */
 .case-content {
-    flex: 1;
-    padding: 30px;
+  flex: 1;
+  padding: 30px;
 }
-
 .case-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
 }
-
 .case-category {
-    color: var(--light-text);
-    margin-bottom: 15px;
-    font-style: italic;
+  color: var(--light-text);
+  margin-bottom: 15px;
+  font-style: italic;
 }
-
 .read-more {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 15px;
-    font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 15px;
+  font-weight: 600;
+  transition: var(--transition);
 }
-
 .read-more i {
-    margin-left: 5px;
-    transition: var(--transition);
+  margin-left: 5px;
+  transition: var(--transition);
 }
-
 .read-more:hover i {
-    transform: translateX(5px);
+  transform: translateX(5px);
 }
-
+/* 案例轮播左右切换按钮 */
 .cases-nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
-
 .cases-nav button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin: 0 5px;
-    transition: var(--transition);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: var(--transition);
 }
-
 .cases-nav button:hover {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 
-/* 联系我们 */
+/*==============================================================================
+ * 9. 联系我们（.contact section）
+ * -------------------------------------------------------------------------------
+ * 左右布局：联系信息与表单；表单输入框、按钮等细节样式调整。
+ * ============================================================================= */
 .contact-content {
-    display: flex;
-    gap: 50px;
+  display: flex;
+  gap: 50px;
 }
-
 .contact-info {
-    flex: 1;
+  flex: 1;
 }
-
 .contact-form {
-    flex: 1;
+  flex: 1;
 }
-
+/* 联系信息图标+标题+文字垂直排列 */
 .info-item {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
-
 .info-item i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
 }
-
 .info-item h3 {
-    margin-bottom: 10px;
-    color: var(--primary-color);
+  margin-bottom: 10px;
+  color: var(--primary-color);
 }
-
 .social-links {
-    margin-top: 30px;
+  margin-top: 30px;
 }
-
 .social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--light-bg);
-    color: var(--primary-color);
-    margin-right: 10px;
-    transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--light-bg);
+  color: var(--primary-color);
+  margin-right: 10px;
+  transition: var(--transition);
 }
-
 .social-links a:hover {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
-
+/* 表单字段组 */
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
 .form-group input,
 .form-group select,
 .form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    transition: var(--transition);
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: var(--transition);
 }
-
+/* 焦点时边框变色 */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
+  border-color: var(--primary-color);
+  outline: none;
 }
-
+/* 文本域固定高度，可垂直手动调整 */
 .form-group textarea {
-    height: 150px;
-    resize: vertical;
+  height: 150px;
+  resize: vertical;
 }
 
-/* 页脚 */
+/*==============================================================================
+ * 10. 页脚（.footer）
+ * -------------------------------------------------------------------------------
+ * 背景深色，文字白色；整体左右两列布局，底部区域版权说明与链接排列。
+ * ============================================================================= */
 .footer {
-    background-color: var(--dark-bg);
-    color: white;
-    padding: 60px 0 20px;
+  background-color: var(--dark-bg);
+  color: white;
+  padding: 60px 0 20px;
 }
-
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
-
 .footer-logo {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
 .footer-logo img {
-    height: 40px;
-    margin-bottom: 15px;
+  height: 40px;
+  margin-bottom: 15px;
 }
-
+/* 页脚链接区域，多列布局 */
 .footer-links {
-    display: flex;
-    gap: 50px;
+  display: flex;
+  gap: 50px;
 }
-
 .footer-col h4 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
 }
-
 .footer-col h4::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background-color: var(--accent-color);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background-color: var(--accent-color);
 }
-
 .footer-col ul li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-
 .footer-col a {
-    color: #cbd5e0;
-    transition: var(--transition);
+  color: #cbd5e0;
+  transition: var(--transition);
 }
-
 .footer-col a:hover {
-    color: white;
-    padding-left: 5px;
+  color: white;
+  padding-left: 5px;
 }
-
+/* 页脚底部：版权与链接 */
 .footer-bottom {
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
 .footer-bottom p {
-    color: #cbd5e0;
+  color: #cbd5e0;
 }
-
 .footer-bottom-links a {
-    color: #cbd5e0;
-    margin-left: 20px;
-    transition: var(--transition);
+  color: #cbd5e0;
+  margin-left: 20px;
+  transition: var(--transition);
 }
-
 .footer-bottom-links a:hover {
-    color: white;
+  color: white;
 }
 
-/* 返回顶部按钮 */
+/*==============================================================================
+ * 11. 返回顶部按钮（.back-to-top）
+ * -------------------------------------------------------------------------------
+ * 固定在页面右下角，默认隐藏，滚动时显示；点击可平滑回到顶部。
+ * ============================================================================= */
 .back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 999;
+}
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+.back-to-top:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/*==============================================================================
+ * 12. 动画关键帧（@keyframes）
+ * -------------------------------------------------------------------------------
+ * 定义常用的淡入、上滑、下滑等动画效果，配合各组件使用。
+ * ============================================================================= */
+/* 普通淡入 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 从上方滑入并淡出 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 从下方滑入并淡出 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*==============================================================================
+ * 13. 响应式设计（Media Queries）
+ * -------------------------------------------------------------------------------
+ * 针对不同屏幕宽度，调整排版与间距，保证移动端与平板设备显示友好。
+ * ============================================================================= */
+
+/* 中型屏幕（≤ 992px） */
+@media (max-width: 992px) {
+  .section {
+    padding: 60px 0;
+  }
+  /* 均改为垂直布局 */
+  .about-content,
+  .product-info,
+  .contact-content {
+    flex-direction: column;
+  }
+  /* 图片顶部间距 */
+  .about-image,
+  .product-image {
+    margin-top: 30px;
+  }
+  /* 价值观项目换行展示 */
+  .company-values {
+    flex-wrap: wrap;
+  }
+  .value-item {
+    flex: 0 0 calc(50% - 15px);
+    margin-bottom: 30px;
+  }
+  /* 案例卡片垂直布局 */
+  .case-item {
+    flex-direction: column;
+  }
+  .case-image {
+    min-height: 200px;
+  }
+}
+
+/* 小型屏幕（≤ 768px） */
+@media (max-width: 768px) {
+  /* 头部容器变为相对定位 */
+  .header .container {
+    position: relative;
+  }
+  /* 显示汉堡按钮 */
+  .mobile-menu-btn {
+    display: block;
+  }
+  /* 隐藏主导航，在点击汉堡时显示 */
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-10px);
     transition: var(--transition);
-    z-index: 999;
-}
-
-.back-to-top.show {
+  }
+  /* 当添加 .show 时展开菜单 */
+  .main-nav.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
+  }
+  /* 主导航改为纵向排列 */
+  .main-nav ul {
+    flex-direction: column;
+  }
+  .main-nav li {
+    margin: 0 0 15px 0;
+  }
+  /* 缩小 hero 标题 */
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  /* 缩小区块标题 */
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  /* 页脚内容垂直排列 */
+  .footer-content,
+  .footer-links {
+    flex-direction: column;
+  }
+  .footer-col {
+    margin-bottom: 30px;
+  }
+  /* 页脚底部链接垂直排列 */
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-bottom-links {
+    margin-top: 15px;
+  }
+  .footer-bottom-links a {
+    margin: 0 10px;
+  }
 }
 
-.back-to-top:hover {
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-/* 动画 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 响应式设计 */
-@media (max-width: 992px) {
-    .section {
-        padding: 60px 0;
-    }
-    
-    .about-content,
-    .product-info,
-    .contact-content {
-        flex-direction: column;
-    }
-    
-    .about-image,
-    .product-image {
-        margin-top: 30px;
-    }
-    
-    .company-values {
-        flex-wrap: wrap;
-    }
-    
-    .value-item {
-        flex: 0 0 calc(50% - 15px);
-        margin-bottom: 30px;
-    }
-    
-    .case-item {
-        flex-direction: column;
-    }
-    
-    .case-image {
-        min-height: 200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header .container {
-        position: relative;
-    }
-    
-    .mobile-menu-btn {
-        display: block;
-    }
-    
-    .main-nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        box-shadow: var(--box-shadow);
-        padding: 20px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: var(--transition);
-    }
-    
-    .main-nav.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    
-    .main-nav ul {
-        flex-direction: column;
-    }
-    
-    .main-nav li {
-        margin: 0 0 15px 0;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .section-header h2 {
-        font-size: 2rem;
-    }
-    
-    .footer-content,
-    .footer-links {
-        flex-direction: column;
-    }
-    
-    .footer-col {
-        margin-bottom: 30px;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-bottom-links {
-        margin-top: 15px;
-    }
-    
-    .footer-bottom-links a {
-        margin: 0 10px;
-    }
-}
-
+/* 超小屏幕（≤ 576px） */
 @media (max-width: 576px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
-    .hero-btns .btn {
-        display: block;
-        width: 100%;
-        margin: 10px 0;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .value-item {
-        flex: 0 0 100%;
-    }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  /* hero 按钮在小屏时占满宽度并分行 */
+  .hero-btns .btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+  /* 服务卡片独占一列 */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  /* 价值观项目在极窄屏时全占一行 */
+  .value-item {
+    flex: 0 0 100%;
+  }
+}
+
+/*==============================================================================
+ * 14. Normalize.css v8.0.1
+ * -------------------------------------------------------------------------------
+ * 用于消除浏览器默认样式差异，保证跨浏览器表现一致。
+ * 来源：https://github.com/necolas/normalize.css MIT License
+ * ============================================================================= */
+
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+/* Sections
+   ========================================================================== */
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+  margin: 0;
+}
+/**
+ * Render the `main` element consistently in IE.
+ */
+main {
+  display: block;
+}
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+  background-color: transparent;
+}
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+  font-weight: bolder;
+}
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub {
+  bottom: -0.25em;
+}
+sup {
+  top: -0.5em;
+}
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+  border-style: none;
+}
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline;
+}
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+  overflow: auto;
+}
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+  display: block;
+}
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item;
+}
+/* Misc
+   ========================================================================== */
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+  display: none;
+}
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+  display: none;
 }

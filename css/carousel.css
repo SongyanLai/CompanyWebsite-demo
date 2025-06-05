@@ -1,0 +1,83 @@
+/* ===========================
+   轮播图样式（carousel.css）
+   =========================== */
+
+/* 确保 hero 区域本身具有相对定位，以便 carousel 绝对定位 */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 500px; /* 可根据实际需求调整高度 */
+}
+
+/* 轮播图容器，覆盖整个 hero 区域 */
+.carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* 每张幻灯片都绝对定位，覆盖整个容器 */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* 当前活动幻灯片可见 */
+.slide.active {
+  opacity: 1;
+}
+
+/* 幻灯片内的图片充满父容器，保持裁剪 */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 确保文字内容（hero-content）置于轮播图上层 */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white; /* 文字改为白色，以便在深色或多变的背景下都能清晰可见 */
+  text-align: center;
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%);
+}
+
+/* 按钮颜色可根据需求自行调整 */
+.hero-content .btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.hero-content .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* 小屏幕时，可适当调整文字大小 */
+@media (max-width: 768px) {
+  .hero {
+    height: 350px;
+  }
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
